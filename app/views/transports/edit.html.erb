@@ -1,0 +1,78 @@
+<% if user_signed_in? %>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><%= link_to 'PROGO', transports_path %></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" >Welcome <strong><%= current_user.name %></strong></a></li>
+                    <li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li>
+                    <li><%= link_to 'Show profile', user_path(current_user), :class => 'navbar-link' %></li>
+                    <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+<% else %>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><%= link_to 'PROGO', transports_path %></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></li>
+                    <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+<% end %>
+<h1>Edit Transport</h1>
+<%= form_for :transport, url: transport_path(@transport), method: :patch do |f| %>
+    <p>
+        <%= f.label :name  %><br>
+        <%= f.text_field :name %>
+    </p>
+    <p>
+        <%= f.label :car_plate %><br>
+        <%= f.text_field :car_plate %>
+    </p>
+    <p>
+        <%= f.label :year  %><br>
+        <%= f.text_field :year %>
+    </p>
+    <p>
+        <%= f.label :manufacturer %><br>
+        <%= f.text_field :manufacturer %>
+    </p>
+    <p>
+        <%= f.label :model  %><br>
+        <%= f.text_field :model %>
+    </p>
+    <p>
+        <%= f.label :accident %><br>
+        <%= f.check_box :accident %>
+    </p>
+    <p>
+        <%= f.label :owner  %><br>
+        <%= f.text_field :owner %>
+    </p>
+    <p>
+        <%= f.label :payment %><br>
+        <%= f.text_field :payment %>
+    </p>
+    <p>
+        <%= f.label :cc  %><br>
+        <%= f.text_field :cc %>
+    </p>
+    <p>
+        <%= f.submit %>
+    </p>
+<% end %>
+<button class="btn btn-default"><%= link_to 'Back', transports_path %></button>

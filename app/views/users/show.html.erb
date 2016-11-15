@@ -1,0 +1,129 @@
+<% if user_signed_in? %>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><%= link_to 'PROGO', transports_path %></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" >Welcome <strong><%= current_user.name %></strong></a></li>
+                    <li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li>
+                    <li><%= link_to 'Show profile', user_path(current_user), :class => 'navbar-link' %></li>
+                    <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+<% else %>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><%= link_to 'PROGO', transports_path %></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></li>
+                    <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+<% end %>
+<div class="container vertical-center">
+    <h1>User</h1>
+    <p>
+        <b>Name</b>
+        <%= @user.name %>
+    </p>
+
+    <p>
+        <b>Date of birth</b>
+        <%= @user.date_of_birth %>
+    </p>
+
+    <p>
+        <b>Email</b>
+        <%= @user.email %>
+    </p>
+
+    <b>Owned</b>
+    <table class="table table-striped">
+        <th>Image</th>
+        <th>Name</th>
+        <th>Car Plate</th>
+        <th>Year</th>
+        <th>Manufacturer</th>
+        <th>Model</th>
+        <th>Accident</th>
+        <th>Owner</th>
+        <th>CC</th>
+        <th>Payment</th>
+        <th>Rented</th>
+        <th colspan="3"></th>
+            <tr>
+                <% @transports.each do |transport| %>
+                    <% if transport.owner == current_user.email %>
+                        <td><img src="/uploads/<%= transport.image_name %>" class="img-index" /></td>
+                        <td><%= transport.name %></td>
+                        <td><%= transport.car_plate %></td>
+                        <td><%= transport.year %></td>
+                        <td><%= transport.manufacturer %></td>
+                        <td><%= transport.model %></td>
+                        <td><%= transport.accident %></td>
+                        <td><%= transport.owner %></td>
+                        <td><%= transport.cc %></td>
+                        <td><%= transport.payment %></td>
+                        <% if transport.rented == NIL  %>
+                            <td><%= transport.rented = false %></td>
+                        <% else %>
+                            <td><%= transport.rented %></td>
+                        <% end %>
+                        <td><%= link_to 'Show', transport_path(transport) %></td>
+                            <td><%= link_to 'Edit', edit_transport_path(transport) %></td>
+                            <td><%= link_to 'Destroy', transport_path(transport), method: :delete, data: {confirm: 'Are you sure?' } %></td>
+                        <tr>
+                        <% end %>
+                    <% end %>
+                </table>
+
+                <br />
+                <b>Rented</b>
+                <table class="table table-striped">
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Car Plate</th>
+                    <th>Year</th>
+                    <th>Manufacturer</th>
+                    <th>Model</th>
+                    <th>Accident</th>
+                    <th>Owner</th>
+                    <th>CC</th>
+                    <th>Payment</th>
+                    <th></th>
+                        <tr>
+                            <% @transports.each do |transport| %>
+                                <% if transport.client == current_user.email %>
+                                    <td><img src="/uploads/<%= transport.image_name %>" class="img-index" /></td>
+                                    <td><%= transport.name %></td>
+                                    <td><%= transport.car_plate %></td>
+                                    <td><%= transport.year %></td>
+                                    <td><%= transport.manufacturer %></td>
+                                    <td><%= transport.model %></td>
+                                    <td><%= transport.accident %></td>
+                                    <td><%= transport.owner %></td>
+                                    <td><%= transport.cc %></td>
+                                    <td><%= transport.payment %></td>
+                                    <td><%= link_to 'Show', transport_path(transport) %></td>
+                                    <tr>
+                                    <% end %>
+                                <% end %>
+                            </table>
+
+                            <button class="btn btn-default"><%= link_to "Add new transport", new_transport_path %></button>
+
+                            <button class="btn btn-default"><%= link_to 'Back', transports_path %></button>
+                        </div>

@@ -1,0 +1,55 @@
+<% if user_signed_in? %>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><%= link_to 'PROGO', transports_path %></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" >Welcome <strong><%= current_user.name %></strong></a></li>
+                    <li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li>
+                    <li><%= link_to 'Show profile', user_path(current_user), :class => 'navbar-link' %></li>
+                    <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+<% else %>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><%= link_to 'PROGO', transports_path %></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></li>
+                    <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+<% end %>
+<div class="container vertical-center" id="transport-rent">
+<h1>Payment Method & Date</h1><br />
+
+<p>
+    <b>Start Day</b>
+    <%= date_select :date_time, 'Start renting' %>
+</p>
+<p>
+    <b>End Day</b>
+    <%= date_select :date_time, 'End renting' %>
+</p>
+
+<p><%= radio_button :transaction, ' VISA', :checked => true %>VISA</p>
+<p><%= radio_button :transaction, ' CIMB', :checked => false %>CIMB</p>
+<p><%= radio_button :transaction, ' MayBank', :checked => true %>MayBank</p>
+<p><%= radio_button :transaction, ' HongLeong', :checked => false %>HongLeong</p>
+<p><%= radio_button :transaction, ' Public Bank', :checked => false %>Public Bank</p>
+<p><%= radio_button :transaction, ' Bank Islam', :checked => false %>Bank Islam</p>
+<button class="btn btn-default"><%= link_to 'Submit', transport_result_path %></button>
+</div>

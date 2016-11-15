@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  car_plate: MyString
+  year: MyString
+  manufacturer: MyString
+  model: MyString
+  accident: false
+  owner: MyString
+  client: MyString
+  rented: false
+  payment: 1.5
+  cc: 1
+  used: 1
+
+two:
+  name: MyString
+  car_plate: MyString
+  year: MyString
+  manufacturer: MyString
+  model: MyString
+  accident: false
+  owner: MyString
+  client: MyString
+  rented: false
+  payment: 1.5
+  cc: 1
+  used: 1
